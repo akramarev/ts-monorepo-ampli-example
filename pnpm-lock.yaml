@@ -21,12 +21,15 @@ importers:
   examples/cra:
     specifiers:
       '@craco/craco': ~6.4.0
+      '@nighttrax/ampli': '*'
       '@nighttrax/components': '*'
       '@nighttrax/foo': '*'
+      '@types/amplitude-js': ^8.9.6
       '@types/jest': ~27.4.0
       '@types/node': ~16.11.0
       '@types/react': ~17.0.0
       '@types/react-dom': ~17.0.0
+      amplitude-js: ^8.16.1
       cross-env: ~7.0.2
       react: ~17.0.0
       react-dom: ~17.0.0
@@ -34,8 +37,11 @@ importers:
       ts-jest: ~27.1.3
       tsconfig-paths-webpack-plugin: ~3.5.0
     dependencies:
+      '@nighttrax/ampli': link:../../packages/ampli
       '@nighttrax/components': link:../../packages/components
       '@nighttrax/foo': link:../../packages/foo
+      '@types/amplitude-js': 8.9.6
+      amplitude-js: 8.16.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     devDependencies:
@@ -180,6 +186,14 @@ importers:
       webpack: 5.67.0_webpack-cli@4.9.2
       webpack-cli: 4.9.2_webpack@5.67.0
 
+  packages/ampli:
+    specifiers:
+      rimraf: ~3.0.2
+      typescript: ~4.5.0
+    devDependencies:
+      rimraf: 3.0.2
+      typescript: 4.5.5
+
   packages/bar:
     specifiers:
       '@nighttrax/foo': ^1.0.0
@@ -193,12 +207,14 @@ importers:
 
   packages/components:
     specifiers:
+      '@nighttrax/ampli': '*'
       '@nighttrax/foo': '*'
       '@types/react': ~17.0.0
       react: ~17.0.0
       react-dom: ~17.0.0
       rimraf: ~3.0.2
     dependencies:
+      '@nighttrax/ampli': link:../ampli
       '@nighttrax/foo': link:../foo
     devDependencies:
       '@types/react': 17.0.38
@@ -215,6 +231,23 @@ importers:
       typescript: 4.5.5
 
 packages:
+
+  /@amplitude/types/1.9.2:
+    resolution: {integrity: sha512-s+Q/O8kNfocZiyGvVdtM5T4JGPwLRZ4Q26wtEF5xJhyCtJglGMe0ixe6u/6iW9s4JHIq+LlPlUu5095pVsdtNA==}
+    engines: {node: '>=10'}
+    dev: false
+
+  /@amplitude/ua-parser-js/0.7.26:
+    resolution: {integrity: sha512-62/Rid6YQ7F2KT/5vTre41Y26ivrEoFC8lbrsJZqBKaiXMJWG0YpNv9RgxNSaZS2jPLVQgoB/FFeWxihOLfIcg==}
+    dev: false
+
+  /@amplitude/utils/1.9.2:
+    resolution: {integrity: sha512-hGOIoIjmZ0pq/3b2gBrr17TaEarlR+qzFGu5npm76+scd/51F0eNvjd0vgV6WbJT1cxhyH/5Z8kihGWOU3vS3Q==}
+    engines: {node: '>=10'}
+    dependencies:
+      '@amplitude/types': 1.9.2
+      tslib: 1.14.1
+    dev: false
 
   /@ampproject/remapping/2.0.1:
     resolution: {integrity: sha512-EldHF4Ufj3NL9yCAmYrPzY+3/Yqrzxu24F4Mu4nRjK3w70AKYRmhuLwGZdA9JeoDsbIwkgGkbqUK2INuF582Og==}
@@ -2586,7 +2619,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.9
-    dev: true
 
   /@babel/template/7.16.7:
     resolution: {integrity: sha512-I8j/x8kHUrbYRTUxXrrMbfCa7jxkE7tZre39x3kjr9hvI82cK1FfqLygotcWN5kdPGWcLdWMHpSBavse5tWw3w==}
@@ -4689,6 +4721,10 @@ packages:
     resolution: {integrity: sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==}
     dev: true
 
+  /@types/amplitude-js/8.9.6:
+    resolution: {integrity: sha512-x5Z2pdlb2o8x9RW541UWO+hzoQHhX1NZxoCUO8ApRwBto8RpoIO4LZBIsgLUWNxAzxXaL3A3vErbNzHDawcnqQ==}
+    dev: false
+
   /@types/babel__core/7.1.18:
     resolution: {integrity: sha512-S7unDjm/C7z2A2R9NzfKCK1I+BAALDtxEmsJBwlB3EzNfb929ykjL++1CK9LO++EIp2fQrC8O+BwjKvz6UeDyQ==}
     dependencies:
@@ -5528,6 +5564,16 @@ packages:
       uri-js: 4.4.1
     dev: true
 
+  /amplitude-js/8.16.1:
+    resolution: {integrity: sha512-1X9xvxmWIK1DlVluuk2QXziYcgSiZE4d4DLhMzY9yUP+KauCbFy37lW4m3dixp6Y8AIGU+WUAfAsCLqXYlF0rw==}
+    dependencies:
+      '@amplitude/ua-parser-js': 0.7.26
+      '@amplitude/utils': 1.9.2
+      '@babel/runtime': 7.16.7
+      blueimp-md5: 2.19.0
+      query-string: 5.1.1
+    dev: false
+
   /anchor-markdown-header/0.5.7:
     resolution: {integrity: sha1-BFBj125qH5zTJ6V6ASaqD97Dcac=}
     dependencies:
@@ -6142,6 +6188,10 @@ packages:
   /bluebird/3.7.2:
     resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
     dev: true
+
+  /blueimp-md5/2.19.0:
+    resolution: {integrity: sha512-DRQrD6gJyy8FbiE4s+bDoXS9hiW3Vbx5uCdwvcCf3zLHL+Iv7LtGHLpr+GZV8rHG8tK766FGYBwRbu8pELTt+w==}
+    dev: false
 
   /body-parser/1.19.1:
     resolution: {integrity: sha512-8ljfQi5eBk8EJfECMrgqNGWPEY5jWP+1IzkzkGdFFEwFQZZyaZ21UqdaHktgiMlH0xLHqIFtE/u2OYE5dOtViA==}
@@ -7236,7 +7286,6 @@ packages:
   /decode-uri-component/0.2.0:
     resolution: {integrity: sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=}
     engines: {node: '>=0.10'}
-    dev: true
 
   /dedent/0.7.0:
     resolution: {integrity: sha1-JJXduvbrh0q7Dhvp3yLS5aVEMmw=}
@@ -13181,6 +13230,15 @@ packages:
     resolution: {integrity: sha512-TIRk4aqYLNoJUbd+g2lEdz5kLWIuTMRagAXxl78Q0RiVjAOugHmeKNGdd3cwo/ktpf9aL9epCfFqWDEKysUlLQ==}
     engines: {node: '>=0.6'}
 
+  /query-string/5.1.1:
+    resolution: {integrity: sha512-gjWOsm2SoGlgLEdAGt7a6slVOk9mGiXmPFMqrEhLQ68rhQuBnpfs3+EmlvqKyxnCo9/PPlF+9MtY02S1aFg+Jw==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      decode-uri-component: 0.2.0
+      object-assign: 4.1.1
+      strict-uri-encode: 1.1.0
+    dev: false
+
   /query-string/6.14.1:
     resolution: {integrity: sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==}
     engines: {node: '>=6'}
@@ -13594,7 +13652,6 @@ packages:
 
   /regenerator-runtime/0.13.9:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
-    dev: true
 
   /regenerator-transform/0.14.5:
     resolution: {integrity: sha512-eOf6vka5IO151Jfsw2NO9WpGX58W6wWmefK3I1zEGr0lOD0u8rwPaNqQL1aRxUaxLeKO3ArNh3VYg1KbaD+FFw==}
@@ -14372,6 +14429,11 @@ packages:
   /streamsearch/0.1.2:
     resolution: {integrity: sha1-gIudDlb8Jz2Am6VzOOkpkZoanxo=}
     engines: {node: '>=0.8.0'}
+    dev: false
+
+  /strict-uri-encode/1.1.0:
+    resolution: {integrity: sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=}
+    engines: {node: '>=0.10.0'}
     dev: false
 
   /strict-uri-encode/2.0.0:
@@ -15218,7 +15280,6 @@ packages:
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-    dev: true
 
   /tslib/2.3.1:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}

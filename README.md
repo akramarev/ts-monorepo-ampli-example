@@ -1,13 +1,39 @@
 <!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
 
-![](media/monorepo.png)
-
-Template project for setting up a TypeScript monorepo
-
-[![tests](https://github.com/NiGhTTraX/ts-monorepo/actions/workflows/tests.yml/badge.svg)](https://github.com/NiGhTTraX/ts-monorepo/actions/workflows/tests.yml)
+![](media/amplitude-event-explorer.png)
 
 </div>
+
+## Ampli Notes
+
+This example demonstrates how to add codegened Ampli SDK to Typescript monorepo project.
+You can find the original project repo [here](https://github.com/NiGhTTraX/ts-monorepo). 
+
+**Installation**
+* consider to install [Amplitude Event Explorer](https://chrome.google.com/webstore/detail/amplitude-event-explorer/acehfjhnmhbmgkedjmjlobpgdicnhkbp) in order to monitor firing events in real time
+* run `pnpm i` in the repo root directory to install all dependencies
+
+**Web application**
+* run `pnpm start` in `examples/cra` directory to start the web application
+* open the web application in the browser http://localhost:3000 and click a button to trigger an event
+* check Amplitude Event Explorer, you should see two or more events fired with a user property set
+
+**Instrumentation status**
+* run `ampli status` in the repo root directory, you should see the following output:
+```
+➜  ts-monorepo-ampli-example git:(master) ✗ ampli status
+✔ Verifying event tracking implementation in source code
+ ✔ AppLoaded (1 location)
+ ✔ ButtonClicked (1 location)
+Events Tracked: 2 found, 2 total
+```
+
+**Notes**
+* ampli codegened code was encapsulated into a separate `ampli` package
+* `Path` value in `ampli.json` file was modified to point to the codegened code location
+* both `cra` web application and `components` packages depend on the `ampli` package
+* `cra` application also depends on `amplitude-js` and `@types/amplitude-js` packages
 
 ----
 
